@@ -1,16 +1,17 @@
-##### YetiForce CRM Python API Wrapper
+## YetiForce CRM Python API Wrapper
 
-###### Description
+#### Description
 
 This is a lightweight API Wrapper for YetiForce REST services.
 
-###### Installation:
+#### Installation:
 
 `pip install yetiforce-python`
 
-###### Usage:
 
-Login:
+#### Usage:
+
+##### Login:
 ```python
 >>> from yetiforce_python import YetiForceAPI
 >>> api = YetiForceAPI(
@@ -50,7 +51,7 @@ Login:
  'type': 1}
 ```
 
-Get modules:
+##### Get modules:
 ````python
 >>> api.list_modules()
 {'Accounts': 'Accounts',
@@ -62,7 +63,7 @@ Get modules:
 }
 ````
 
-Get objects:
+##### Get objects:
 ```python
 >>> api.Leads.get_list(){'count': 1,
  'headers': {'assigned_user_id': 'Assigned To',
