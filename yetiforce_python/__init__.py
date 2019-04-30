@@ -113,12 +113,17 @@ class YetiForceAPI(object):
                         if x is not None])
         response = self._session.request(method=method, url=url, params=params,
                                          data=data, json=json, headers=headers)
+        if response.status_code >= 500:
+            raise YetiForceAPIException(
+                message='Could not process request: {}'.format(
+                    response.status_code))
 
         try:
             data = response.json()
         except json.decoder.JSONDecodeError:
             raise YetiForceAPIException(
-                'Could not process request: {}'.format(response.status_code))
+                message='Could not process request: {}'.format(
+                    response.status_code))
 
         if not data['status']:
             raise YetiForceAPIException(message=data['error']['message'],
