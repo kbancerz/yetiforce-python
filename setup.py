@@ -9,7 +9,7 @@ setup(
     author_email='kajetan.bancerz@gmail.com',
     url='https://github.com/kbancerz/yetiforce-python',
     license=open('LICENSE').read(),
-    long_description=open('README.md').read(),
+    #long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
     install_requires=[
         'requests>=2.21.0',
