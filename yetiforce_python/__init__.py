@@ -1,3 +1,5 @@
+import json
+
 import requests
 
 
@@ -187,7 +189,7 @@ class YetiForceAPI(object):
         if isinstance(offset, int):
             extra_headers['X-ROW-OFFSET'] = str(offset)
         if isinstance(fields, (list, tuple)):
-            extra_headers['X-FIELDS'] = str(list(fields))
+            extra_headers['X-FIELDS'] = json.dumps(list(fields))
 
         return self._request(module=module, action=action,
                              extra_headers=extra_headers)
