@@ -43,6 +43,12 @@ class YetiForceAPI(object):
             return self._api.get_list(self._name, limit=limit, offset=offset,
                                       fields=fields)
 
+        def get_related_list(self, record_id, related, limit=1000, offset=0,
+                             fields=None):
+            return self._api.get_record_related_list(
+                self._name, record_id=record_id, related=related, limit=limit,
+                offset=offset, fields=fields)
+
         def fields(self):
             return self._api.fields(self._name)
 
@@ -215,6 +221,16 @@ class YetiForceAPI(object):
     def get_list(self, module, limit=1000, offset=0, fields=None):
         return self._list(module, action='RecordsList', limit=limit,
                           offset=offset, fields=fields)
+
+    def get_record_related_list(self, module, record_id, related, limit=1000,
+                                offset=0, fields=None):
+        action = 'RecordRelatedList/{}/{}'.format(record_id, related)
+        try:
+            return self._list(module, action=action, limit=limit,
+                              offset=offset, fields=fields)
+        except YetiForceAPIException as ex:
+            if ex.message == 'Record doesn\'t exist':
+                raise KeyError(record_id) from ex
 
     def get_record(self, module, record_id):
         action = 'Record/{}'.format(record_id)
