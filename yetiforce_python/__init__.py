@@ -64,10 +64,12 @@ class YetiForceAPI(object):
         def update(self, record_id, data):
             return self._api.update_record(self._name, record_id, data)
 
-    def __init__(self, url, ws_user, ws_pass, ws_key, username, password):
+    def __init__(self, url, ws_user, ws_pass, ws_key, username, password,
+                 verify=False):
         self._ws_url = url.rstrip('/')
         self._ws_auth = (ws_user, ws_pass)
         self._ws_key = ws_key
+        self._verify = verify
 
         self._username = username
         self._password = password
@@ -157,6 +159,7 @@ class YetiForceAPI(object):
             'X-API-KEY': self._ws_key,
         }
         self._session.auth = self._ws_auth
+        self._session.verify = self._verify
 
         payload = {
             'userName': self._username,
