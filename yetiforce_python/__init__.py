@@ -1,4 +1,4 @@
-import json
+import json as json_
 
 import requests
 
@@ -130,7 +130,7 @@ class YetiForceAPI(object):
 
         try:
             data = response.json()
-        except json.decoder.JSONDecodeError:
+        except json_.decoder.JSONDecodeError:
             raise YetiForceAPIException(
                 message='Could not process request: {}'.format(
                     response.status_code))
@@ -198,7 +198,7 @@ class YetiForceAPI(object):
         if isinstance(offset, int):
             extra_headers['X-ROW-OFFSET'] = str(offset)
         if isinstance(fields, (list, tuple)):
-            extra_headers['X-FIELDS'] = json.dumps(list(fields))
+            extra_headers['X-FIELDS'] = json_.dumps(list(fields))
 
         return self._request(module=module, action=action,
                              extra_headers=extra_headers)
