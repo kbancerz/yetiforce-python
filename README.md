@@ -20,7 +20,8 @@ This is a lightweight API Wrapper for YetiForce REST services.
 >>>     ws_pass='<webservice passcode>', 
 >>>     ws_key='<webservice API key>', 
 >>>     username='<user's name>', 
->>>     password='<user's password>'
+>>>     password='<user's password>',
+>>>     verify='<path to CA certificate>',
 >>>     )
 >>> api.login()
 {'language': True,
@@ -65,7 +66,8 @@ This is a lightweight API Wrapper for YetiForce REST services.
 
 ##### Get objects:
 ```python
->>> api.Leads.get_list(){'count': 1,
+>>> api.Leads.get_list()
+{'count': 1,
  'headers': {'assigned_user_id': 'Assigned To',
              'company': 'Lead name',
              'email': 'Primary email',
