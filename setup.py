@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='YetiForce-Python',
-    version='0.1.1',
+    version='0.2.0',
     description='YetiForce CRM Python API Wrapper',
     packages=['yetiforce_python'],
     author='Kajetan Bancerz',
