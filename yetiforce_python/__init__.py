@@ -232,6 +232,8 @@ class YetiForceAPI(object):
             if ex.message == 'Record doesn\'t exist':
                 raise KeyError(record_id) from ex
 
+            raise ex
+
     def get_record(self, module, record_id):
         action = 'Record/{}'.format(record_id)
         try:
@@ -240,6 +242,8 @@ class YetiForceAPI(object):
             if ex.message == 'Record doesn\'t exist':
                 raise KeyError(record_id) from ex
 
+            raise ex
+
     def delete_record(self, module, record_id):
         action = 'Record/{}'.format(record_id)
         try:
@@ -247,6 +251,8 @@ class YetiForceAPI(object):
         except YetiForceAPIException as ex:
             if ex.message == 'Record doesn\'t exist':
                 raise KeyError(record_id) from ex
+
+            raise ex
 
     def create_record(self, module, data):
         action = 'Record/'
@@ -272,3 +278,5 @@ class YetiForceAPI(object):
         except YetiForceAPIException as ex:
             if ex.message == 'Record doesn\'t exist':
                 raise KeyError(record_id) from ex
+
+            raise ex
