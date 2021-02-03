@@ -39,9 +39,9 @@ class YetiForceAPI(object):
         def __repr__(self):
             return self.__str__()
 
-        def get_list(self, limit=1000, offset=0, fields=None):
+        def get_list(self, limit=1000, offset=0, fields=None, condition=None):
             return self._api.get_list(self._name, limit=limit, offset=offset,
-                                      fields=fields)
+                                      fields=fields, condition=condition)
 
         def get_related_list(self, record_id, related, limit=1000, offset=0,
                              fields=None):
@@ -191,7 +191,7 @@ class YetiForceAPI(object):
         self._modules = None
         return result
 
-    def _list(self, module, action=None, limit=None, offset=None, fields=None):
+    def _list(self, module, action=None, limit=None, offset=None, fields=None, condition=None):
         extra_headers = {}
         if isinstance(limit, int):
             extra_headers['X-ROW-LIMIT'] = str(limit)
@@ -199,6 +199,8 @@ class YetiForceAPI(object):
             extra_headers['X-ROW-OFFSET'] = str(offset)
         if isinstance(fields, (list, tuple)):
             extra_headers['X-FIELDS'] = json_.dumps(list(fields))
+        if isinstance(condition, dict):
+            extra_headers['X-CONDITION'] = json_.dumps(dict(condition))
 
         return self._request(module=module, action=action,
                              extra_headers=extra_headers)
@@ -218,9 +220,9 @@ class YetiForceAPI(object):
     def hierarchy(self, module):
         return self._list(module, action='Hierarchy')
 
-    def get_list(self, module, limit=1000, offset=0, fields=None):
+    def get_list(self, module, limit=1000, offset=0, fields=None, condition=None):
         return self._list(module, action='RecordsList', limit=limit,
-                          offset=offset, fields=fields)
+                          offset=offset, fields=fields, condition=condition)
 
     def get_record_related_list(self, module, record_id, related, limit=1000,
                                 offset=0, fields=None):
