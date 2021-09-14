@@ -70,9 +70,10 @@ class YetiForceAPI(object):
         def update(self, record_id, data):
             return self._api.update_record(self._name, record_id, data)
 
-    def __init__(self, url, ws_user, ws_pass, ws_key, username, password,
+    def __init__(self, url, container, ws_user, ws_pass, ws_key, username, password,
                  verify=False):
         self._ws_url = url.rstrip('/')
+        self.container = container
         self._ws_auth = (ws_user, ws_pass)
         self._ws_key = ws_key
         self._verify = verify
@@ -119,8 +120,9 @@ class YetiForceAPI(object):
         headers.update(extra_headers or {})
 
         url = '/'.join([x for x in
-                        [self._ws_url, self.WEBSERVICE, module, action]
+                        [self._ws_url, self.WEBSERVICE, self.container, module, action]
                         if x is not None])
+
         response = self._session.request(method=method, url=url, params=params,
                                          data=data, json=json, headers=headers)
         if response.status_code >= 500:
