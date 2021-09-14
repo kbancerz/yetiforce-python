@@ -122,8 +122,7 @@ class YetiForceAPI(object):
         url = '/'.join([x for x in
                         [self._ws_url, self.WEBSERVICE, self.container, module, action]
                         if x is not None])
-        
-        print(url)
+
         response = self._session.request(method=method, url=url, params=params,
                                          data=data, json=json, headers=headers)
         if response.status_code >= 500:
